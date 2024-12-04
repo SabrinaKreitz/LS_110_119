@@ -52,15 +52,12 @@ function playersTurn() {
       player.push(hit(deck));
       prompt(`Your current hand is ${player.join(" ")}.`);
       if (busted(player)) break;
-    }
-
-    else if (answer === "stay") {
+    } else if (answer === "stay") {
       prompt("You decided to stay!");
       break;
-    }
-    else {
+    } else {
       prompt("This was not a valid entry. Please try again");
-    } 
+    }
   }
 }
 function dealersTurn() {
@@ -135,7 +132,9 @@ while (true) {
     break;
   }
 
-  prompt("Do you want to play again? Hit n to exit the game or any other key to continue.");
+  prompt(
+    "Do you want to play again? Hit n to exit the game or any other key to continue."
+  );
   let answer = readline.question().toLowerCase();
   if (answer === "n") break;
 }
