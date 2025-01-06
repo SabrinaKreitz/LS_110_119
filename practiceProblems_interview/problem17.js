@@ -1,7 +1,7 @@
 /*
+> 45 minutes > took some time to come up with a good solution to find prime number
 
 Create a function that takes an array of integers as an argument. The function should determine the minimum integer value that can be appended to the array so the sum of all the elements equal the closest prime number that is greater than the current sum of the numbers. For example, the numbers in `[1, 2, 3]` sum to 6. The nearest prime number greater than 6 is 7. Thus, we can add 1 to the array to sum to 7.
-
 
 Notes:
 
