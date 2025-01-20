@@ -49,3 +49,37 @@ p(objeq(countLetters('W. E. B. Du Bois'), expected));
 p(objeq(countLetters('x'), {'x': 1}));
 p(objeq(countLetters(''), {}));
 p(objeq(countLetters('!!!'), {}));
+
+/* second attempt 9 minutes
+Create a function that takes a string argument and returns a hash in which the keys represent the lowercase letters in the string, and the values represent how often the corresponding letter occurs in the string.
+
+Problem: 
+count the occurances of a lowercase letter in a string
+  - iterate through the string 
+  - if the char is a lowercase letter 
+  - add it to count object 
+  - if no occurance is found return emptpy object 
+
+A: count the occurances of a lowercase letter in a string and return them in an object. 
+
+- CREATE `count` object and set to empty object 
+- ITERATE through input string 
+  - if current char is a lowercase letter 
+    - if char exists as property in `count` 
+      - increment `char` in `object` by 1 
+    - else 
+      - create property `char` in `count` and set to 1 
+- RETURN `count` 
+*/
+let p = console.log; 
+
+function countLetters (string) {
+  let count = {};
+
+  for (let char of string) {
+    if(char >= 'a' && char <= `z`) {
+      count[char] ? count[char] += 1 : count[char] = 1; 
+    }
+  }
+  return count;
+}

@@ -90,3 +90,62 @@ p(featured(999999987));    // 1023456987
 p(featured(9876543186));   // 9876543201
 p(featured(9876543200));   // 9876543201
 p(featured(9876543201));   // "There is no possible number that fulfills those requirements."
+
+// second attempt > 33 minutes
+
+let p = console.log;
+/*
+A featured number (something unique to this exercise) is an odd number that is a multiple of 7, with all of its digits occurring exactly once each. For example, 49 is a featured number, but 98 is not (it is not odd), 97 is not (it is not a multiple of 7), and 133 is not (the digit 3 appears twice).
+
+Write a function that takes an integer as an argument and returns the next featured number greater than the integer. Issue an error message if there is no next featured number.
+
+NOTE: The largest possible featured number is 9876543201.
+
+
+A: When given an integer, find the next biggest integer which fulfills the requirements of a featured number: It's odd, divisible by 7, and each digit occurs only once 
+
+LOOP from input number, increment by 1 as long as number is smaller than 9876543201
+  IF checkFeatured(currentNumber) returns true 
+    - RETURN current number 
+RETURN "There is no possible number that fulfills those requirements."
+
+checkFeatured (number) [helperfunction]
+IF number is equally divisible by 2 
+  - RETURN false
+IF number is NOT equally divisible by 7
+  - RETURN false 
+COERCE number into array of single elements 
+ITERATE over array 
+  - CREATE new array with all but the current element 
+  - IF current element is included in new array 
+    - RETURN false 
+RETURN true
+*/
+
+function featured (number) {
+  for (let idx = number + 1 ; idx <= 9876543201; idx ++) {
+    if (checkFeatured(idx)) return idx; 
+  }
+  return "There is no possible number that fulfills those requirements."
+}
+
+
+function checkFeatured (number) {
+  if (number % 2 === 0 || number % 7 !== 0) return false; 
+  let numberToArray = String(number).split(''); 
+
+  for (let digit1 of numberToArray) {
+    if(numberToArray.filter(digit2 => digit1 === digit2).length > 1) return false 
+  }
+  return true; 
+}
+p(featured(12));           // 21
+p(featured(20));           // 21
+p(featured(21));           // 35
+p(featured(997));          // 1029
+p(featured(1029));         // 1043
+p(featured(999999));       // 1023547
+p(featured(999999987));    // 1023456987
+p(featured(9876543186));   // 9876543201
+p(featured(9876543200));   // 9876543201
+p(featured(9876543201));   // "There is no possible number that fulfills those requirements."

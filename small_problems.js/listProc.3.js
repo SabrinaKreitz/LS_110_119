@@ -33,3 +33,5 @@ function multiplyAllPairs (arr1, arr2) {
 }
 
 p(multiplyAllPairs([2, 4], [4, 3, 1, 2]));    // [2, 4, 4, 6, 8, 8, 12, 16]
+
+//second attempt: same result 

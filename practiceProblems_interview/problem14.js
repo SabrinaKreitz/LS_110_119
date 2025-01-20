@@ -42,3 +42,37 @@ p(sevenEleven(25) === 75);
 p(sevenEleven(100) === 1153);
 p(sevenEleven(0) === 0);
 p(sevenEleven(-100) === 0);
+
+/* second attempt 14 minutes
+
+A: Find all the unique multiples of 7 or 11 that are smaller than the input number and sum them up 
+
+CREATE `multiples` array and set to empty array 
+ITERATE from 7, as long as num is smaller than input number 
+  - if curren tnum is equally divisible by 7 or 11
+    - push num to `multiples` 
+IF `multiples` is empty
+  - RETURN 0 
+ELSE
+  - RETURN sum of elements in multiples 
+*/
+
+let p = console.log; 
+
+function sevenEleven (number) {
+  let multiples = [];
+
+  for (let num = 7; num < number; num ++) {
+    if(num % 7 === 0 || num % 11 === 0) multiples.push(num);
+  }
+  return multiples.length === 0 ? 0 : multiples.reduce((a, b) => a + b);
+}
+
+
+p(sevenEleven(10) === 7);
+p(sevenEleven(11) === 7);
+p(sevenEleven(12) === 18);
+p(sevenEleven(25) === 75);
+p(sevenEleven(100) === 1153);
+p(sevenEleven(0) === 0);
+p(sevenEleven(-100) === 0);

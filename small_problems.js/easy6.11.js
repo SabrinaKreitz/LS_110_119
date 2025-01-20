@@ -35,3 +35,36 @@ console.log(isBalanced("((What) (is this))?") === true);
 console.log(isBalanced("((What)) (is this))?") === false);
 console.log(isBalanced("Hey!") === true);
 console.log(isBalanced(")Hey!(") === false);
+
+/* 2nd attempt: 12 minutes
+Write a function that takes a string as an argument and returns true if all parentheses in the string are properly balanced, false otherwise. To be properly balanced, parentheses must occur in matching '(' and ')' pairs.
+
+A: Count the opening and closing brackets in a string to make sure that they are properly matched. 
+
+CREATE count variable and set to 0 
+ITERATE through input string 
+    - IF count is smaller than 0 
+      - RETURN false 
+    - IF current char equals `(` increment count by 1 
+    - IF current char equals `)` decrement count by 1
+RETURN true if count equals 0, otherwise return false 
+*/
+
+function isBalanced (string) {
+  let count = 0; 
+
+  for (let char of string) {
+    if (count < 0) return false;
+    if (char === '(') count ++;
+    if (char === ')') count --;
+  }
+  return count === 0 ? true : false; 
+}
+
+console.log(isBalanced("What (is) this?") === true);
+console.log(isBalanced("What is) this?") === false);
+console.log(isBalanced("What (is this?") === false);
+console.log(isBalanced("((What) (is this))?") === true);
+console.log(isBalanced("((What)) (is this))?") === false);
+console.log(isBalanced("Hey!") === true);
+console.log(isBalanced(")Hey!(") === false);

@@ -54,3 +54,23 @@ p(maxRotation(35));              // 53
 p(maxRotation(105));             // 15 -- the leading zero gets dropped
 p(maxRotation(8703529146));      // 7321609845
 
+//second attempt
+
+let p = console.log;
+
+function maxRotation (number) {
+  let maxRotation = String(number);
+  for (let idx = 0; idx < maxRotation.length - 1; idx ++) {
+    let newRotation = maxRotation.split('').filter((num, index) => index !== idx).concat(maxRotation[idx]).join('')
+    maxRotation = newRotation;
+  }
+  return Number(maxRotation);
+}
+
+
+
+p(maxRotation(735291));          // 321579 
+p(maxRotation(3));               // 3
+p(maxRotation(35));              // 53
+p(maxRotation(105));             // 15 -- the leading zero gets dropped
+p(maxRotation(8703529146));      // 7321609845
