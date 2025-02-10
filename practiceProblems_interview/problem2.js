@@ -48,3 +48,43 @@ p(minimumSum([1, 2, 3, 4, 5, -5]) === 9);
 p(minimumSum([1, 2, 3, 4, 5, 6]) === 15);
 p(minimumSum([55, 2, 6, 5, 1, 2, 9, 3, 5, 100]) === 16);
 p(minimumSum([-1, -5, -3, 0, -1, 2, -4]) === -10);
+
+//second attempt: 24 minutes > made a lot of small mistakes that cost time 
+
+/*
+Create a function that takes an array of integers as an argument. The function should return the minimum sum of 5 consecutive numbers in the array. If the array contains fewer than 5 elements, the function should return null.
+
+
+A: Find the leading subarray of 5 elements in an array for which the sum is smaller than all other leading subarrays of 5 elements. 
+
+IF length of input array is smaller than 5
+  RETURN null 
+CREATE minSum variable and set to infiinity 
+  LOOP through input array starting from idx1 = 1, incrementing by 1, runs as long as idx1 is smaller or equal to length of input array minus 5
+      IF sum of elements in subarray of idx1 and idx1 + 5 is smaller than `minSum` 
+        SET minSum to sum 
+RETURN minSum 
+*/
+
+
+const p = console.log;
+
+
+function minimumSum (array) {
+  if(array.length < 5) return null; 
+
+  let minSum = Infinity; 
+
+  for (let idx1 = 0; idx1 <= array.length - 5; idx1++) {
+    let currentSum = array.slice(idx1, idx1 + 5).reduce((a, b) => a + b); 
+    if(currentSum < minSum) minSum = currentSum; 
+    }
+    return minSum; 
+  }
+
+
+p(minimumSum([1, 2, 3, 4]) === null);
+p(minimumSum([1, 2, 3, 4, 5, -5]) === 9);
+p(minimumSum([1, 2, 3, 4, 5, 6]) === 15);
+p(minimumSum([55, 2, 6, 5, 1, 2, 9, 3, 5, 100]) === 16);
+p(minimumSum([-1, -5, -3, 0, -1, 2, -4]) === -10);

@@ -34,3 +34,37 @@ p(evenSubstrings('3145926') === 16);
 p(evenSubstrings('2718281') === 16);
 p(evenSubstrings('13579') === 0);
 p(evenSubstrings('143232') === 12);
+
+
+/* 2nd attempt > 13 minutes
+Algorithm 
+Count the number of substrings in a string which - as numbers - are even numbers. 
+
+Create count variable and set to 0 
+Iterate through input string and create all possible substrings 
+If substring turned into a number is even 
+  Increment count by 1
+Return count 
+*/
+
+let p = console.log; 
+
+function evenSubstrings (string) {
+  let count = 0; 
+
+  for (let idx1 = 0; idx1 < string.length; idx1 ++) {
+    if(Number(string[idx1]) % 2 === 0) count++;  
+    
+    for(let idx2 = idx1 + 1; idx2 < string.length; idx2++) {
+      if(Number(string.substring(idx1, idx2 + 1)) % 2 === 0) count++; 
+    }
+  }
+
+  return count; 
+}
+
+p(evenSubstrings('1432') === 6);
+p(evenSubstrings('3145926') === 16);
+p(evenSubstrings('2718281') === 16);
+p(evenSubstrings('13579') === 0);
+p(evenSubstrings('143232') === 12);

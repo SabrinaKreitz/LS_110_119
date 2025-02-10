@@ -33,3 +33,33 @@ p(oddFellow([7, 99, 7, 51, 99]) === 51);
 p(oddFellow([7, 99, 7, 51, 99, 7, 51]) === 7);
 p(oddFellow([25, 10, -6, 10, 25, 10, -6, 10, -6]) === -6);
 p(oddFellow([0, 0, 0]) === 0);
+
+
+/* 2nd attempt > 6 minutes
+Create a function that takes an array of integers as an argument and returns the integer that appears an odd number of times. There will always be exactly one such integer in the input array.
+
+P: Find the number in an array that appears only once 
+
+
+A: 
+Iterate through input array 
+Create new array with all elements that are equal to the current element 
+If the length of the array is odd 
+Return element 
+*/
+
+let p = console.log; 
+
+function oddFellow (array) {
+  let oddOne; 
+
+  for (let num of array) {
+    if (array.filter(elm => elm === num).length % 2 !== 0) return num; 
+  };
+}
+
+p(oddFellow([4]) === 4);
+p(oddFellow([7, 99, 7, 51, 99]) === 51);
+p(oddFellow([7, 99, 7, 51, 99, 7, 51]) === 7);
+p(oddFellow([25, 10, -6, 10, 25, 10, -6, 10, -6]) === -6);
+p(oddFellow([0, 0, 0]) === 0);

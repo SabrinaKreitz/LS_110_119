@@ -42,7 +42,6 @@ Func: oddities(arr)
  - Othwerwise, increment eveCount by 1
 4. If oddCount equals 2 AND evenCount is 1, return a boolean
 -------------
->> missing -1 case
 */
 
 function oddities(arr) {
@@ -59,12 +58,6 @@ function oddities(arr) {
 
   return (oddCount === 2) && (evenCount === 1);
 }
-
-// let odd = arr.filter(num => num % 2 === 0).length;
-
-// allGroupsOfThree.reduce(
-  // odditites 
-//)
 
 
 function countTriples(nums) {
@@ -89,17 +82,36 @@ console.log(countTriples([2, 4, 6, 8])); // Expected output: -1
 console.log(countTriples([1, 3, 5, 7])); // Expected output: -1
 console.log(countTriples([1, 2, 3, 4, 5, 6])); // Expected output: 9
 
-/*
-- loosing time on adding test cases, not necessary 
+//2nd attempt > 45 minutes
 
+// A: Find all possible triplets of 2 odd and 1 even number in array 
+//     - Find all unique pairs of odd numbers in array and multiply with count of even numbers 
 
+// CREATE onlyOdds and set to array of odd numbers in array 
+// CREATE countOfEvens and set to length of only even numbers in array 
 
--*/
+// IF onlyOdds is samaller than 2 OR countOfEvens is smaller than 1 
+//    - RETURN -1
 
-let alphabet = 'abcdefghijklmnopqrstuvwxyz';
-let counter = 0;
+// RETURN the product of accumulated indices of onlyOdds array with countOfEvens
 
-while (counter < alphabet.length) {
-  console.log(alphabet[counter]);
-  counter += 1;
+function countTriples (array) {
+  
+  let onlyOdds = array.filter(num => num % 2 === 1);  
+
+  let countOfEvens = array.filter(num => num % 2 === 0).length; 
+
+  if (onlyOdds.length < 2 || countOfEvens < 1) return -1 
+
+  return onlyOdds.map((_, idx) => idx).reduce((a, b) => a + b) * countOfEvens // count of even numbers times count of unique pairs of odd number equals possible combinations. Count of unique pairs of odd numbers can be found by multiplying it's indices (that method doesn't work for triples - there it's better to use the mathematical formula for finding k combinations in n numbers.)
 }
+
+
+// console.log(countTriples([1, 2, 3, 4])); // Expected output: 2
+// console.log(countTriples([2, 4, 6, 8])); // Expected output: -1
+// console.log(countTriples([1, 3, 5, 7])); // Expected output: -1
+// console.log(countTriples([1, 2, 3, 4, 5, 6])); // Expected output: 9
+//console.log(countTriples([1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9])) // expected output 84 (added test cases )
+//console.log(countTriples([23, 4, 5, 23, 5, 66, 3, 4, 5, 11, 2, 3, 5, 4, 6, 7, 89, 90, 111])) // expected output 462 (added test cases)
+
+//note: official formula for counting all unique triples is: ((n - 1) * n) / 2

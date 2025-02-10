@@ -1,4 +1,4 @@
-/*
+/* not completed
 
 Create a function that takes a nonempty string as an argument and returns an array consisting of a string and an integer. If we call the string argument s, the string component of the returned array t, and the integer component of the returned array k, then s, t, and k must be related to each other such that s === t * k. The values of t and k should be the shortest possible substring and the largest possible repeat count that satisfies this equation.
 
@@ -53,3 +53,36 @@ p(eq(repeatedSubstring('xyzxyzxyz'), ['xyz', 3]));
 // p(eq(repeatedSubstring('xyz'), ['xyz', 1]));
 // p(eq(repeatedSubstring('aaaaaaaa'), ['a', 8]));
 // p(eq(repeatedSubstring('superduper'), ['superduper', 1]));
+
+
+/*  2nd attempt 19 minutes
+Create a function that takes a nonempty string as an argument and returns an array consisting of a string and an integer. If we call the string argument s, the string component of the returned array t, and the integer component of the returned array k, then s, t, and k must be related to each other such that s === t * k. The values of t and k should be the shortest possible substring and the largest possible repeat count that satisfies this equation.
+
+You may assume that the string argument consists entirely of lowercase alphabetic letters.
+
+A: Find the leading substring in string, that when repeated until it fits the length of input string is equal to input string
+
+ITERATE through input string (s) starting at idx 0 running as long as idx is smaller than length of input string 
+CREATE leading substrings (t)
+CREATE variable k and set to length of s divided by length of t 
+  IF t repeated k times equals s 
+  RETURN  array [t, k]
+  */
+
+  let p = console.log; 
+  const eq = (arr1, arr2) => JSON.stringify(arr1) === JSON.stringify(arr2);
+  
+  
+  function repeatedSubstring (s) {
+  
+    for (let idx = 1; idx <= s.length; idx ++) {
+      let t = s.substring(0, idx); 
+      let k = s.length / t.length;
+      if (t.repeat(k) === s) return [t, k]
+    }
+  }
+  p(eq(repeatedSubstring('xyzxyzxyz'), ['xyz', 3]));
+  p(eq(repeatedSubstring('xyxy'), ['xy', 2]));
+  p(eq(repeatedSubstring('xyz'), ['xyz', 1]));
+  p(eq(repeatedSubstring('aaaaaaaa'), ['a', 8]));
+  p(eq(repeatedSubstring('superduper'), ['superduper', 1]));

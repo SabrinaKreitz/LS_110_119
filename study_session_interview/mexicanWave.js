@@ -36,7 +36,9 @@ for(let idx = 0; idx < mexicanWave.length; idx ++) {
   if (currentWave[idx] === " "); continue
 } 
 }
-}
+
+
+
 
 
 

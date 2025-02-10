@@ -60,3 +60,51 @@ const eq = (arr1, arr2) => JSON.stringify(arr1) === JSON.stringify(arr2);
 p(eq(closestNumbers([5, 25, 15, 11, 20]), [15, 11]));
 p(eq(closestNumbers([19, 25, 32, 4, 27, 16]), [25, 27]));
 p(eq(closestNumbers([12, 22, 7, 17]), [12, 7]));
+
+/* second attempt >> 31 minutes
+Create a function that takes an array of integers as an argument and returns an array of two numbers that are closest together in value. If there are multiple pairs that are equally close, return the pair that occurs first in the array. 
+
+A: Find the pair of elements in an array with the smallest difference. If two pairs have the same difference choose the one that occurs first
+
+CREATE closestPair variable
+CREATE smallestDivident variable and set it to infinity 
+LOOP through input array 
+  > For each element idx1
+    > LOOP through input array starting at idx 2 = idx1 + 1
+      > CREATE subarray variable with elements idx1 and idx2 
+      > Calculate difference between elements 
+        > IF difference is smaller than 0 
+          > multiply difference with -1
+      > IF difference is smaller than `smallestDivident` 
+        > SET closestPair to subarray 
+        > SET smallestDivident to difference 
+RETURN closestPair
+*/
+
+function closestNumbers (array) {
+  let closestPair; 
+  let smallestDivident = Infinity; 
+
+  array.forEach((num1, idx1) => {
+
+    array.slice(idx1 + 1).forEach (num2 => {
+      let pair = [num1, num2]
+      let divident = pair.reduce((a, b) => a - b);
+      if(divident < 0) divident *= -1; 
+      if (divident < smallestDivident) {
+      closestPair = pair; 
+      smallestDivident = divident; 
+      }
+    })})
+    return closestPair; 
+  }
+
+
+let p = console.log;
+
+
+const eq = (arr1, arr2) => JSON.stringify(arr1) === JSON.stringify(arr2);
+
+p(eq(closestNumbers([5, 25, 15, 11, 20]), [15, 11]));
+p(eq(closestNumbers([19, 25, 32, 4, 27, 16]), [25, 27]));
+p(eq(closestNumbers([12, 22, 7, 17]), [12, 7]));

@@ -38,3 +38,33 @@ p(greatestProduct('23456') === 360);      // 3 * 4 * 5 * 6
 p(greatestProduct('3145926') === 540);    // 5 * 9 * 2 * 6
 p(greatestProduct('1828172') === 128);    // 1 * 8 * 2 * 8
 p(greatestProduct('123987654') === 3024); // 9 * 8 * 7 * 6
+
+
+/* 2nd attempt: 8 minutes
+
+CREATE greatest variable and set to 0 
+ITERATE through input string from idx = 0 as long as idx is smaller or equal to length of string minus 4 
+  CREATE variable `quadProd` and set t: 
+    - substring from idx until idx + 4 (including)
+    - turn into array of single chars 
+    - calculate product with chars turned into numbers 
+  IF `quadProd` is higher than `greatest` set greatest to `quadProd` 
+RETURN `greatest`
+*/
+
+let p = console.log; 
+
+function greatestProduct (string) {
+  let greatest = 0; 
+
+  for (let idx = 0; idx <= string.length - 4; idx++) {
+    let quadProd = string.substring(idx, idx + 4).split('').reduce((a, b) => Number(a) * Number(b)); 
+    if(quadProd > greatest) greatest = quadProd; 
+  }
+  return greatest; 
+}
+
+p(greatestProduct('23456') === 360);      // 3 * 4 * 5 * 6
+p(greatestProduct('3145926') === 540);    // 5 * 9 * 2 * 6
+p(greatestProduct('1828172') === 128);    // 1 * 8 * 2 * 8
+p(greatestProduct('123987654') === 3024); // 9 * 8 * 7 * 6

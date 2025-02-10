@@ -107,3 +107,62 @@ p(equalSumIndex([0, 2, 4, 4, 2, 3, 2]) === -1);
 // // supposed to return the smallest correct index, the correct
 // // return value is 0.
 p(equalSumIndex([0, 20, 10, -60, 5, 25]) === 0);
+
+// Reys solution 
+
+
+function equalSumIndex(arr) {
+  for (let currIdx = 0; currIdx < arr.length; currIdx++) {
+    let beforeSum;
+    let afterSum;
+
+    if (currIdx === 0) beforeSum = 0;
+    else {
+      beforeSum = arr.slice(0, currIdx).reduce((sum, curr) => sum += curr);
+    }
+
+    if (currIdx === arr.length - 1) afterSum = 0;
+    else {
+      afterSum = arr.slice(currIdx + 1).reduce((sum, curr) => sum += curr)
+    }
+
+    if (beforeSum === afterSum) return currIdx;
+  }
+
+  return -1;
+}
+
+// third attempt : 27 minutes
+
+let p = console.log; 
+
+function equalSumIndex (array) {
+
+  let smallest = Infinity; 
+
+  const LAST_INDEX = array.length - 1; 
+
+  if (array.filter((_, idx) => idx !== 0).reduce((a, b) => a + b) === 0) return 0; 
+
+  if(array.filter((_, idx) => idx !== LAST_INDEX).reduce((a, b) => a + b) === 0) return LAST_INDEX; 
+
+  for (let idx = 1; idx < array.length - 1; idx++) {
+    let smallerIndicesSum = array.slice(0, idx).reduce((a, b) => a + b); 
+    let greaterIndicesSum = array.slice(idx + 1).reduce((a, b) => a + b); 
+    
+    if (smallerIndicesSum === greaterIndicesSum && idx < smallest) smallest = idx;  
+  }
+
+  return smallest === Infinity ? -1 : smallest; 
+}
+
+
+p(equalSumIndex([1, 2, 4, 4, 2, 3, 2]) === 3);
+p(equalSumIndex([7, 99, 51, -48, 0, 4]) === 1);
+p(equalSumIndex([17, 20, 5, -60, 10, 25]) === 0);
+p(equalSumIndex([0, 2, 4, 4, 2, 3, 2]) === -1);
+
+// The following test case could return 0 or 3. Since we're
+// supposed to return the smallest correct index, the correct
+// return value is 0.
+p(equalSumIndex([0 ,20, 10, -60, 5, 25, 0]) === 0);

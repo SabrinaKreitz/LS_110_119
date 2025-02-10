@@ -35,3 +35,18 @@ p(whatIsDifferent([7, 7, 7, 7.7, 7]) === 7.7);
 p(whatIsDifferent([1, 1, 1, 1, 1, 1, 1, 11, 1, 1, 1, 1]) === 11);
 p(whatIsDifferent([3, 4, 4, 4]) === 3);
 p(whatIsDifferent([4, 4, 4, 3]) === 3);
+
+// Rey's solution 
+/*
+Algorithm
+- Find the number with only one index
+- Return that number
+
+1. Iterate over the array
+  - Find element that has the same first and last index
+2. Return first element in the array
+*/
+
+function whatIsDifferent(arr) {
+  return arr.find(el => arr.indexOf(el) === arr.lastIndexOf(el));
+}

@@ -54,3 +54,55 @@ p(countSubstrings('', 'x') === 0);
 p(countSubstrings('bbbaabbbbaab', 'baab') === 2);
 p(countSubstrings('bbbaabbbbaab', 'bbaab') === 2);
 p(countSubstrings('bbbaabbbbaabb', 'bbbaabb') === 1);
+
+/* 2nd attempt 20 minutes
+Create a function that takes two string arguments and returns the number of times that the second string occurs in the first string. Note that overlapping strings don't count: 'babab' contains 1 instance of 'bab', not 2.
+
+You may assume that the second argument is never an empty string.
+
+A: Count the amount of times that arg2 uniquely exists in arg1 
+
+CREATE count variable and set to 0
+CREATE length2 
+ITERATE over arg1 starting at idx1 = 0 as long as idx is smaller or equal to length of arg1 minus length of arg2 
+CREATE substring of arg1 from idx1 until idx1 + length2
+  IF substring equals arg 2
+    Increment count by 1
+    Increment idx1 by length2 
+  ELSE 
+    Increment idx1 by 1
+RETURN count 
+*/
+
+let p = console.log; 
+
+function countSubstrings (string1, string2) {
+  let count = 0; 
+  let length1 = string1.length; 
+  let length2 = string2.length; 
+  let idx = 0; 
+
+  while(idx <= length1 - length2) {
+    let substring = string1.substring(idx, idx + length2); 
+
+    if(substring === string2) {
+      count ++; 
+      idx += length2; 
+    } else {
+      idx += 1; 
+    }
+  }
+
+  return count; 
+}
+
+
+p(countSubstrings('babab', 'bab') === 1);
+p(countSubstrings('babab', 'ba') === 2);
+p(countSubstrings('babab', 'b') === 3);
+p(countSubstrings('babab', 'x') === 0);
+p(countSubstrings('babab', 'x') === 0);
+p(countSubstrings('', 'x') === 0);
+ p(countSubstrings('bbbaabbbbaab', 'baab') === 2);
+p(countSubstrings('bbbaabbbbaab', 'bbaab') === 2);
+p(countSubstrings('bbbaabbbbaabb', 'bbbaabb') === 1);
