@@ -166,3 +166,50 @@ p(equalSumIndex([0, 2, 4, 4, 2, 3, 2]) === -1);
 // supposed to return the smallest correct index, the correct
 // return value is 0.
 p(equalSumIndex([0 ,20, 10, -60, 5, 25, 0]) === 0);
+
+
+// fourth attempt: 19 minutes
+
+Algorithm: 
+Find the index in an array for which all elements greater and smaller sum up to the same number 
+
+Select all elements of input array except 1st 
+  If they sum up to zero 
+    Return 0
+Select all elements of input array except the last 
+  If they sum up to zero 
+    Return last index of input array 
+
+Iterate through indices of input array from 1st until second to last 
+  Create beforeSum array and set to elements from input array from 0 until current (not including) and sum them up 
+  Create afterSum array and set to elements from input array from current (not including) until last and sum them up 
+  If beforeSum equals afterSum 
+    Return current index 
+Return -1 
+
+
+*/
+
+let p = console.log; 
+
+function equalSumIndex (array) {
+  if(array.filter((_, idx) => idx !== 0).reduce((a, b) => a + b) === 0) return 0; 
+  if(array.filter((_, idx) => idx !== array.length - 1).reduce((a, b) => a + b) === 0) return array.length - 1;
+  
+  for (let idx = 1; idx < array.length - 1; idx++) {
+    let beforeSum = array.slice(0, idx).reduce((a, b) => a + b); 
+    let afterSum = array.slice(idx + 1).reduce((a, b) => a + b); 
+    if(beforeSum === afterSum) return idx; 
+  }
+  return -1; 
+}
+
+p(equalSumIndex([1, 2, 4, 4, 2, 3, 2]) === 3);
+p(equalSumIndex([7, 99, 51, -48, 0, 4]) === 1);
+p(equalSumIndex([17, 20, 5, -60, 10, 25]) === 0);
+p(equalSumIndex([0, 2, 4, 4, 2, 3, 2]) === -1);
+
+// The following test case could return 0 or 3. Since we're
+// supposed to return the smallest correct index, the correct
+// return value is 0.
+p(equalSumIndex([0, 20, 10, -60, 5, 25]) === 0);
