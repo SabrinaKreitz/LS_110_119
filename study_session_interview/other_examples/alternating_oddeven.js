@@ -82,3 +82,99 @@ console.log(longestAlternatingSubarray([2, 4, 6, 8])); // Expected: []
 console.log(longestAlternatingSubarray([1, 3, 5, 7])); // Expected: []  
 console.log(longestAlternatingSubarray([1, 1, 3, 7, 8, 5])); // Expected: [7, 8, 5]
 console.log(longestAlternatingSubarray([4, 6, 7, 12, 11, 9, 17])); // Expected: 6, 7, 12, 11]
+
+// third attempt: 34 minutes
+
+/* 
+Write a function that returns the maximum possible consecutive alternating odd and even (or even and odd) numbers. Minimum possible length is 2. If there’s none return [].
+
+Problem: 
+1. Iterate through input array 
+2. Save number in subarray when sum of current and previous number is even
+3. Return longest consecutive subarray 
+
+
+Rules: 
+- if no matches are found > return empty array 
+- min length of match needs to be 2 
+
+Data
+Input > array of number 
+[1, 1, 3, 7, 8, 5]
+Output> array of alternating odd and even numbers or empty array if no matches are found 
+[6, 7, 12, 11]
+
+Logic: 
+
+Track max : [6, 7, 12, 11] > set initially to empty array []
+
+[4, 6, 7, 12, 11, 9, 17]
+Track currentSub []
+If it's empty 
+[6] 
+Check if next is different to current in even or oddness 
+If it is add it 
+If not > checke if the array is greater than 2 and if it's longer than max 
+Replace max with current 
+Empty the array 
+
+Testing oddness and eveness: 
+
+- Any even numbers summed up will give even number 
+- Any odd numbers summed up will give even number 
+
+
+Algorithm: 
+Find all subarrays in input array that have alternating odd and even numbers 
+Return the longest subarray 
+
+Create maxSub and set to empty array 
+Create currentSub and set to empty array 
+
+Iterate through input array 
+  If currentSub is empty  
+    Add current element 
+    Continue iterating 
+  If last element in currentSub and current element sum up to uneven number 
+    Add current elementn to currentSub
+    If current element is last element and length of currentSub is greater than 1 and greater than maxSub
+      Replace maxSub with currentSub 
+    Continue iterating 
+  If currentSub is greater than 1 and greater than maxSub 
+    Replace maxSub with currentSub 
+    Set currentSub to array with current element 
+  Set currentSub to array with current element 
+Return maxSub
+
+*/
+
+function longestAlternatingSubarray(arr) {
+  let maxSub = []; 
+  let currentSub = []; 
+
+  for (let digit of arr) {
+    if (currentSub.length === 0) {
+      currentSub.push(digit); 
+      continue; 
+    }
+    if ((currentSub[currentSub.length - 1] + digit) % 2 !== 0) {
+      currentSub.push(digit); 
+      if(arr.lastIndexOf(digit) === arr.length - 1 && currentSub.length > 1 && currentSub.length > maxSub.length) maxSub = currentSub;  
+      continue; 
+    }
+    if(currentSub.length > 1 && currentSub.length > maxSub.length) {
+      maxSub = currentSub; 
+      currentSub = [digit]; 
+    }
+    currentSub = [digit]; 
+    
+  }
+  return maxSub; 
+ }
+
+console.log(longestAlternatingSubarray([1, 2, 3, 4, 5, 6])); // Expected: [1, 2, 3, 4, 5, 6]
+console.log(longestAlternatingSubarray([2, 4, 6, 8])); // Expected: []
+console.log(longestAlternatingSubarray([1, 3, 5, 7])); // Expected: []  
+console.log(longestAlternatingSubarray([1, 1, 3, 7, 8, 5])); // Expected: [7, 8, 5]
+console.log(longestAlternatingSubarray([4, 6, 7, 12, 11, 9, 17])); // Expected: [6, 7, 12, 11]
+
